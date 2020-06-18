@@ -1,0 +1,83 @@
+#!/bin/sh
+
+#Initialize
+: ${OCF_FUNCTIONS_DIR=${OCF_ROOT}/resource.d/heartbeat}
+. ${OCF_FUNCTIONS_DIR}/.ocf-shellfuncs
+
+#default value
+OCF_RESKEY_greet_default="Hello!"
+: ${OCF_RESKEY_greet=${OCF_RESKEY_greet_default}}
+
+#environment variables for systemd
+DAEMON_PID_FILE=/tmp/ocf_sample/ocf_sample.pid
+
+sample_meta_data() {
+    cat << EOF
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="sample" version="0.1">
+    <version>0.1</version>
+    <longdesc lang="en">sample tcp server</longdesc>
+    <shortdesc lang="en">sample tcp server</shortdesc>
+    <parameters>
+        <parameter name="greet" unique="0" required="0">
+            <longdesc lang="en">greet message</longdesc>
+            <shortdesc lang="en">greet message</shortdesc>
+            <content type="string"/>
+        </parameter>
+    </parameters>
+    <actions>
+        <action name="meta-data" timeout="1" />
+        <action name="start" timeout="1" />
+        <action name="stop" timeout="1" />
+        <action name="monitor" timeout="1" />
+        <action name="validate-all" timeout="1" />
+    </actions>
+</resource-agent>
+EOF
+    return $OCF_SUCCESS
+}
+
+sample_validate(){
+    return $OCF_SUCCESS
+}
+
+sample_start(){
+    echo "GREET=${OCF_RESKEY_greet}" > /tmp/sample-tcp-server/env
+    systemctl start sample-tcp-server
+    sleep 1
+    return $OCF_SUCCESS
+}
+
+sample_stop(){
+    systemctl stop sample-tcp-server
+    return $OCF_SUCCESS
+}
+
+sample_monitor(){
+    if [ -f ${DAEMON_PID_FILE} ];
+    then
+        return $OCF_SUCCESS
+    fi
+    return $OCF_NOT_RUNNING
+}
+
+sample_usage(){
+    echo "Test Resource."
+    return $OCF_SUCCESS
+}
+
+# Translate each action into the appropriate function call
+case $__OCF_ACTION in
+meta-data)      sample_meta_data
+                exit $OCF_SUCCESS
+                ;;
+start)          sample_start;;
+stop)           sample_stop;;
+monitor)        sample_monitor;;
+validate-all)   sample_validate;;
+*)              sample_usage
+                exit $OCF_ERR_UNIMPLEMENTED
+                ;;
+esac
+

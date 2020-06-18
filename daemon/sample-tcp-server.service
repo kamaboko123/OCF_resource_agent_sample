@@ -1,0 +1,11 @@
+[Unit]
+Description=Sample TCP Server
+
+[Service]
+Type=simple
+EnvironmentFile=/tmp/sample-tcp-server/env
+ExecStart=/home/salacia/ocf-test/daemon/tcp-server.py
+ExecStop=/usr/bin/pkill -F /tmp/ocf_sample/ocf_sample.pid
+
+[Install]
+WantedBy=multi-user.target
