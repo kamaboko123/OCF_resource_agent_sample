@@ -9,7 +9,7 @@ OCF_RESKEY_greet_default="Hello!"
 : ${OCF_RESKEY_greet=${OCF_RESKEY_greet_default}}
 
 #environment variables for systemd
-DAEMON_PID_FILE=/tmp/ocf_sample/ocf_sample.pid
+DAEMON_PID_FILE=/tmp/sample-tcp-server/tcp-server.pid
 
 sample_meta_data() {
     cat << EOF
