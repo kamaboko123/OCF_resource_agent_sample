@@ -15,3 +15,6 @@ The daemon is TCP server which is send following message to client.
 `{GREET}` is replaced to environment variable `GREET`.(default: Hello!)  
 `{HOSTNAME}` is replaced to hostname of server.  
 
+## Reference
+[OCFリソースエージェント開発者ガイド « Linux-HA Japan](https://linux-ha.osdn.jp/wp/archives/4328)
+
