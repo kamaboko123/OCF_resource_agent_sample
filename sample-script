@@ -9,7 +9,7 @@ OCF_RESKEY_greet_default="Hello!"
 : ${OCF_RESKEY_greet=${OCF_RESKEY_greet_default}}
 
 #environment variables for systemd
-DAEMON_PID_FILE=/tmp/sample-tcp-server/tcp-server.pid
+DAEMON_PID_FILE=/var/run/sample-tcp-server/tcp-server.pid
 
 sample_meta_data() {
     cat << EOF
@@ -43,7 +43,7 @@ sample_validate(){
 }
 
 sample_start(){
-    echo "GREET=${OCF_RESKEY_greet}" > /tmp/sample-tcp-server/env
+    echo "GREET=${OCF_RESKEY_greet}" > /var/run/sample-tcp-server/env
     systemctl start sample-tcp-server
     sleep 1
     return $OCF_SUCCESS

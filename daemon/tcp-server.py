@@ -7,7 +7,7 @@ import signal
 import sys
 
 PORT = 5678
-PID_FILE_DIR = "/tmp/sample-tcp-server"
+PID_FILE_DIR = "/var/run/sample-tcp-server"
 PID_FILE_NAME = "tcp-server.pid"
 PID_FILE = "%s/%s" % (PID_FILE_DIR, PID_FILE_NAME)
 EXIT = False
