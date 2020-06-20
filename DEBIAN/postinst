@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mkdir -p /var/run/sample-tcp-server
+touch /var/run/sample-tcp-server/env
+systemctl daemon-reload
+

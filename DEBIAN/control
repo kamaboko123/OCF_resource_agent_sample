@@ -1,0 +1,5 @@
+Package: sampletcpserver
+Maintainer: kamaboko <6112062+kamaboko123@users.noreply.github.com>
+Architecture: amd64
+Version: 1.0
+Description: Sample TCP Server

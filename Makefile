@@ -1,0 +1,31 @@
+#Makefile
+
+DIST_DIR=dist
+ROOT_DIR=$(DIST_DIR)/root
+DAEMON_DIR_ROOT=usr/bin
+DAEMON_FILE_NAME=tcp-server.py
+DAEMON_FILE=$(ROOT_DIR)/$(DAEMON_DIR_ROOT)/$(DAEMON_FILE_NAME)
+SERVICE_FILE_DIR_ROOT=lib/systemd/system
+SERVICE_FILE_NAME=sample-tcp-server.service
+SERVICE_FILE=$(ROOT_DIR)/$(SERVICE_FILE_DIR_ROOT)/$(SERVICE_FILE_NAME)
+
+PACKAGE_DIR=DEBIAN
+
+all: $(SERVICE_FILE) $(PACKAGE_DIR) $(DAEMON_FILE)
+	fakeroot dpkg-deb --build $(ROOT_DIR) $(DIST_DIR)
+
+$(DAEMON_FILE): daemon/$(DAEMON_FILE_NAME)
+	mkdir -p $(ROOT_DIR)/$(DAEMON_DIR_ROOT)
+	cp daemon/$(DAEMON_FILE_NAME) $(DAEMON_FILE)
+
+$(SERVICE_FILE):
+	mkdir -p $(ROOT_DIR)/$(SERVICE_FILE_DIR_ROOT)
+	DAEMON_DIR=/$(DAEMON_DIR_ROOT) ./build-service-file.sh > $(SERVICE_FILE)
+
+.PHONY: $(PACKAGE_DIR)
+$(PACKAGE_DIR):
+	cp -r $(PACKAGE_DIR) $(ROOT_DIR)/
+
+.PHONY: clean
+clean: 
+	rm -rf $(DIST_DIR)
