@@ -51,7 +51,7 @@ def server():
         return
 
 def handler(con, addr):
-    con.send(("%s, This is %s!\n" % (GREET, socket.gethostname())).encode())
+    con.send(("%s This is %s!\n" % (GREET, socket.gethostname())).encode())
     con.close()
 
 if __name__ == '__main__':

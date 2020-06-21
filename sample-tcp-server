@@ -15,7 +15,7 @@ sample_meta_data() {
     cat << EOF
 <?xml version="1.0"?>
 <!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
-<resource-agent name="sample" version="0.1">
+<resource-agent name="sample-tcp-server" version="0.1">
     <version>0.1</version>
     <longdesc lang="en">sample tcp server</longdesc>
     <shortdesc lang="en">sample tcp server</shortdesc>
