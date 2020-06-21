@@ -1,6 +1,12 @@
 # OCF Resource Agent Samle
 
 ## Install
+
+## Pre-condition
+You need to complete setup pacemaker and pcs command before install this sample code.
+
+## Install
+
 ```
 git clone https://github.com/kamaboko123/OCF_resource_agent_sample.git
 cd OCF_resource_agent_sample
