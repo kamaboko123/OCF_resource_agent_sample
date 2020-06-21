@@ -20,7 +20,7 @@ sudo pcs resource create TCP-SERVER ocf:kamaboko:sample-tcp-server greet=Hi!
 ```
 
 optional)
-Configure constraint to run sample-tcp-server with VIP
+Configure constraint to run sample-tcp-server and VRRP in same node.
 ```
 sudo pcs resource create VIP ocf:heartbeat:IPaddr2 ip=172.16.0.50 cidr_netmask=24 op monitor interval=10s on-fail="standby"
 sudo pcs constraint colocation add TCP-SERVER with VIP INFINITY
