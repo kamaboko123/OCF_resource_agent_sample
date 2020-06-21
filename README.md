@@ -17,7 +17,7 @@ sudo dpkg -i dist/sampletcpserver_1.0_amd64.deb
 ## Run
 ### Run test
 ```
-sudo ocf-tester -n sample /usr/lib/ocf/resource.d/kamaboko/sample-tcp-server
+sudo ocf-tester -n sample-tcp-server /usr/lib/ocf/resource.d/kamaboko/sample-tcp-server
 ```
 
 ### Run as resource of cluster
