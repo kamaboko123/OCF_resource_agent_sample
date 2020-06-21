@@ -4,6 +4,7 @@ Description=Sample TCP Server
 
 [Service]
 Type=simple
+ExecStartPre=/bin/touch /var/run/sample-tcp-server/env
 EnvironmentFile=/var/run/sample-tcp-server/env
 ExecStart=DAEMON_DIR/tcp-server.py
 ExecStop=/usr/bin/pkill -F /var/run/sample-tcp-server/tcp-server.pid
